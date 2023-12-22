@@ -1,0 +1,38 @@
+.accordion {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  text-align: left;
+  border: 1px solid rgb(194, 190, 190);
+  outline: none;
+  display: flex;
+}
+
+.active,
+.accordion:hover {
+  background-color: #ccc;
+}
+
+.panel {
+  padding: 0 18px;
+  background-color: white;
+  overflow: hidden;
+}
+
+.panel-closed {
+  display: none;
+}
+
+.panel-open {
+  display: block;
+}
+
+.accordion-expand-button {
+  margin-left: auto;
+}
+
+.accordion-indicator {
+  margin-left: auto;
+}

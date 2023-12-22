@@ -1,0 +1,11 @@
+.battery-name-input {
+  height: 26px;
+  padding: 3px;
+  padding-left: 7px;
+  width: 75%;
+}
+
+.battery-create-button {
+  margin-left: 7px;
+  padding: 8px;
+}
