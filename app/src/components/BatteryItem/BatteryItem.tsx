@@ -8,22 +8,24 @@ import { BatteryItemContent } from './BatteryItemContent';
 
 interface BatteryItemProps {
   battery: Battery;
-  onChangeBatteryStatus: (batteryId: string, isChecked: boolean) => void;
 }
 
 export const BatteryItem = (props: BatteryItemProps) => {
-  const { battery, onChangeBatteryStatus } = props;
+  const { battery } = props;
 
   return (
-    <Accordian
-      content={
-        <BatteryItemContent
-          battery={battery}
-          onChangeBatteryStatus={onChangeBatteryStatus}
-        />
-      }
-    >
-      hello
+    <Accordian content={<BatteryItemContent battery={battery} />}>
+      <div className='battery-details'>
+        <div className='battery-detail'>
+          Watt Capacity: {battery.wattCapacity}
+        </div>
+        <div className='battery-detail'>
+          Average Watt Capacity: {battery.averageWattCapacity}
+        </div>
+        <div className='battery-detail'>
+          <label>Returned: {battery.isReturned ? 'Yes' : 'No'} </label>
+        </div>
+      </div>
     </Accordian>
   );
 };

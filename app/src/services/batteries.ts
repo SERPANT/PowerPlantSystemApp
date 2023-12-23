@@ -25,18 +25,6 @@ export const fetchAll = async (): Promise<Battery[]> => {
   return data.data as Battery[];
 };
 
-/**
- * Update status of a battery record returned or not
- *
- * @param batteryId: Id of a battery
- * @param isReturned: new value to be assigned
- */
-export const updateStatus = async (batteryId: string, isReturned: boolean) => {
-  const url = `${config.routes.batteries}/${batteryId}`;
-
-  return http.patch(url, { isReturned });
-};
-
-const batteryServices = { createBattery, fetchAll, updateStatus };
+const batteryServices = { createBattery, fetchAll };
 
 export default batteryServices;

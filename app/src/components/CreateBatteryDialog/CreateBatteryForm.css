@@ -1,0 +1,15 @@
+.battery-field {
+  margin-top: 20px;
+}
+
+.create-button {
+  margin-top: 20px;
+  height: 30px;
+  width: 100px;
+}
+
+.battery-input {
+  margin-top: 5px;
+  width: 90%;
+  height: 30px;
+}

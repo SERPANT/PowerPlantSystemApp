@@ -1,6 +1,6 @@
 import { useCallback, useMemo, useState } from 'react';
 
-import { Battery } from '../types/Battery';
+import { Battery, PartialBattery } from '../types/Battery';
 import batteryServices from '../services/batteries';
 
 import handleError from '../utils/errorHandler';
@@ -28,33 +28,14 @@ export const useBattery = () => {
 
   return useMemo(() => {
     /**
-     * Update battery status
-     *
-     * @param batteryId: Id of the battery record
-     * @param isComplete: Boolean value representing if a battery is returned or not
-     */
-    const updateBatteryStatus = async (
-      batteryId: string,
-      isReturned: boolean
-    ) => {
-      try {
-        await batteryServices.updateStatus(batteryId, isReturned);
-
-        fetchBatteries();
-      } catch (err) {
-        handleError(err);
-      }
-    };
-
-    /**
      * Send request to create a new battery record
      *
      * @param newBatteryName: Name of the battery to be created
      */
-    const createNewBattery = async (newBatteryName: string) => {
+    const createNewBattery = async (battery: PartialBattery) => {
       try {
         await batteryServices.createBattery({
-          name: newBatteryName,
+          ...battery,
         });
 
         fetchBatteries();
@@ -67,7 +48,6 @@ export const useBattery = () => {
       batteries,
       fetchBatteries,
       createNewBattery,
-      updateBatteryStatus,
     };
   }, [batteries, fetchBatteries]);
 };
