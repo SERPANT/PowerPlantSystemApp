@@ -29,8 +29,8 @@ function App() {
   });
 
   useEffect(() => {
-    fetchBatteries(searchBatteryName);
-  }, [searchBatteryName, fetchBatteries]);
+    fetchBatteries(searchBatteryName, postCodeFilter);
+  }, [searchBatteryName, fetchBatteries, postCodeFilter]);
 
   const onFormDataChange = (name: string, value: string | number | boolean) => {
     setCreateBatteryData((prevState) => ({

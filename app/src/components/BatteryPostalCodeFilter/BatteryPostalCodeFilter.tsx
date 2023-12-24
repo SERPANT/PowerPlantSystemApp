@@ -19,15 +19,15 @@ const BatteryPostalCodeFilter = (props: BatteryPostalCodeFilterProps) => {
         <input
           type='text'
           className='filter-input'
-          value={postCodeFilter.to ?? ''}
-          onChange={(e) => onPostCodeToChange(e.target.value)}
+          value={postCodeFilter.from ?? ''}
+          onChange={(e) => onPostCodeFromChange(e.target.value)}
         />
         <span className='discription-text'>to</span>
         <input
           type='text'
           className='filter-input'
-          value={postCodeFilter.from ?? ''}
-          onChange={(e) => onPostCodeFromChange(e.target.value)}
+          value={postCodeFilter.to ?? ''}
+          onChange={(e) => onPostCodeToChange(e.target.value)}
         />
       </div>
     </div>

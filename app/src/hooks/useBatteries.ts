@@ -16,15 +16,27 @@ export const useBattery = () => {
   /**
    * Send a request to fetch all the battereis and store them in a state
    */
-  const fetchBatteries = useCallback(async (searchName?: string) => {
-    try {
-      const batteries = await batteryServices.fetchAll(searchName);
+  const fetchBatteries = useCallback(
+    async (
+      searchName?: string,
+      filterPostCode?: {
+        from: number | null;
+        to: number | null;
+      }
+    ) => {
+      try {
+        const batteries = await batteryServices.fetchAll(
+          searchName,
+          filterPostCode
+        );
 
-      setBatteries(batteries);
-    } catch (err) {
-      handleError(err);
-    }
-  }, []);
+        setBatteries(batteries);
+      } catch (err) {
+        handleError(err);
+      }
+    },
+    []
+  );
 
   return useMemo(() => {
     /**

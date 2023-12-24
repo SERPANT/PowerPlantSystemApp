@@ -2,6 +2,7 @@ import { PartialBattery, Battery } from '../types/Battery';
 
 import http from '../utils/http';
 import config from '../config';
+import { buildQueryString } from '../utils/queryBuilder';
 
 /**
  * Send request for creating a new Battery record
@@ -20,12 +21,20 @@ export const createBattery = async (battery: PartialBattery) => {
  * @param {searchName} : Search with name
  * @returns Battery[]: Array of batteries
  */
-export const fetchAll = async (searchName?: string): Promise<Battery[]> => {
-  const searchUrl = `${config.routes.batteries}${
-    searchName ? `?searchName=${searchName}` : ''
-  }`;
+export const fetchAll = async (
+  searchName?: string,
+  postCodeFilter?: { from: number | null; to: number | null }
+): Promise<Battery[]> => {
+  let queryUrl = buildQueryString('', 'searchName', searchName);
 
-  const { data } = await http.get(searchUrl);
+  if (postCodeFilter) {
+    queryUrl = buildQueryString(queryUrl, 'postCodeFrom', postCodeFilter.from);
+    queryUrl = buildQueryString(queryUrl, 'postCodeTo', postCodeFilter.to);
+  }
+
+  const { data } = await http.get(
+    `${config.routes.batteries}${queryUrl ? `?${queryUrl}` : ''}`
+  );
 
   return data.data as Battery[];
 };
