@@ -16,9 +16,9 @@ export const useBattery = () => {
   /**
    * Send a request to fetch all the battereis and store them in a state
    */
-  const fetchBatteries = useCallback(async () => {
+  const fetchBatteries = useCallback(async (searchName?: string) => {
     try {
-      const batteries = await batteryServices.fetchAll();
+      const batteries = await batteryServices.fetchAll(searchName);
 
       setBatteries(batteries);
     } catch (err) {

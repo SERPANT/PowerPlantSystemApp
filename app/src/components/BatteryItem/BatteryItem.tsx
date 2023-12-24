@@ -19,9 +19,11 @@ export const BatteryItem = (props: BatteryItemProps) => {
         <div className='battery-detail'>
           Watt Capacity: {battery.wattCapacity}
         </div>
-        <div className='battery-detail'>
-          Average Watt Capacity: {battery.averageWattCapacity}
-        </div>
+        {battery.averageWattCapacity && (
+          <div className='battery-detail'>
+            Average Watt Capacity: {battery.averageWattCapacity}
+          </div>
+        )}
         <div className='battery-detail'>
           <label>Returned: {battery.isReturned ? 'Yes' : 'No'} </label>
         </div>

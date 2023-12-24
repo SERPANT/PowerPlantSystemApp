@@ -17,10 +17,15 @@ export const createBattery = async (battery: PartialBattery) => {
 /**
  * Fetch all batteries that have been created
  *
+ * @param {searchName} : Search with name
  * @returns Battery[]: Array of batteries
  */
-export const fetchAll = async (): Promise<Battery[]> => {
-  const { data } = await http.get(config.routes.batteries);
+export const fetchAll = async (searchName?: string): Promise<Battery[]> => {
+  const searchUrl = `${config.routes.batteries}${
+    searchName ? `?searchName=${searchName}` : ''
+  }`;
+
+  const { data } = await http.get(searchUrl);
 
   return data.data as Battery[];
 };

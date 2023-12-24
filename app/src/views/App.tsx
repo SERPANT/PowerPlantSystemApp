@@ -12,14 +12,18 @@ import CreateBatteryDialog from '../components/CreateBatteryDialog/CreateBattery
 import { PartialBattery } from '../types/Battery';
 
 function App() {
+  const { batteries, fetchBatteries, createNewBattery } = useBattery();
+
   const [iscreateNewModalOpen, setCreateNewModalStatus] =
-    useState<boolean>(true);
-  const [newBatteryName, setNewBatteryName] = useState<string>('');
+    useState<boolean>(false);
+  const [searchBatteryName, setsearchBatteryName] = useState<string>('');
   const [createBatteryData, setCreateBatteryData] = useState<PartialBattery>(
     {}
   );
 
-  console.log({ createBatteryData });
+  useEffect(() => {
+    fetchBatteries(searchBatteryName);
+  }, [searchBatteryName, fetchBatteries]);
 
   const onFormDataChange = (name: string, value: string | number | boolean) => {
     setCreateBatteryData((prevState) => ({
@@ -28,11 +32,10 @@ function App() {
     }));
   };
 
-  const { batteries, fetchBatteries, createNewBattery } = useBattery();
-
-  useEffect(() => {
-    fetchBatteries();
-  }, [fetchBatteries]);
+  const createNewBatteryRecord = () => {
+    createNewBattery(createBatteryData);
+    setCreateNewModalStatus(false);
+  };
 
   return (
     <div className='container'>
@@ -42,9 +45,11 @@ function App() {
 
       <div>
         <BatterySearchBar
-          batteryName={newBatteryName}
+          batteryName={searchBatteryName}
           onClickCreateNew={() => setCreateNewModalStatus(true)}
-          onChangeNewBatteryName={(newName) => setNewBatteryName(newName)}
+          onChangeNewBatteryName={(newName) => {
+            setsearchBatteryName(newName);
+          }}
         />
 
         <BatteryList batteries={batteries} />
@@ -52,7 +57,7 @@ function App() {
       <ToastContainer />
 
       <CreateBatteryDialog
-        onCreate={() => createNewBattery(createBatteryData)}
+        onCreate={createNewBatteryRecord}
         formData={createBatteryData}
         open={iscreateNewModalOpen}
         onChange={onFormDataChange}
