@@ -19,6 +19,8 @@ export const createBattery = async (battery: PartialBattery) => {
  * Fetch all batteries that have been created
  *
  * @param {searchName} : Search with name
+ * @param {postCodeFilter} Object containing from and to
+ *
  * @returns Battery[]: Array of batteries
  */
 export const fetchAll = async (
