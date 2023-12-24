@@ -3,7 +3,7 @@ interface BatteryFieldProps {
   name: string;
   value?: string | number;
   disabled?: boolean;
-  onChange: (name: string, value: string | number) => void;
+  onChange: (name: string, value: string) => void;
 }
 
 const BatteryField = (props: BatteryFieldProps) => {

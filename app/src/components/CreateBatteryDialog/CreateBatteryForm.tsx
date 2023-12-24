@@ -13,6 +13,24 @@ interface CreateBatteryFormProps {
 const CreateBatteryForm = (props: CreateBatteryFormProps) => {
   const { formData, onChange, onCreate } = props;
 
+  const numberValidation = (value: string) => {
+    try {
+      parseInt(value);
+
+      return true;
+    } catch {
+      return false;
+    }
+  };
+
+  const onChangeNumberOnlyField = (name: string, value: string) => {
+    const isNumber = numberValidation(value);
+
+    if (isNumber) {
+      onChange(name, parseInt(value));
+    }
+  };
+
   return (
     <div>
       <BatteryField
@@ -25,13 +43,13 @@ const CreateBatteryForm = (props: CreateBatteryFormProps) => {
         name='postcode'
         title='Post Code'
         value={formData.postcode}
-        onChange={onChange}
+        onChange={onChangeNumberOnlyField}
       />
       <BatteryField
         name='wattCapacity'
         title='Watt Capacity'
         value={formData.wattCapacity}
-        onChange={onChange}
+        onChange={onChangeNumberOnlyField}
       />
 
       <BatteryField
@@ -39,7 +57,7 @@ const CreateBatteryForm = (props: CreateBatteryFormProps) => {
         name='averageWattCapacity'
         title='Average Watt Capacity'
         value={formData.averageWattCapacity}
-        onChange={onChange}
+        onChange={onChangeNumberOnlyField}
       />
 
       <div className='battery-field'>
